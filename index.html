@@ -370,27 +370,6 @@
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const data = await res.json();
       const list = document.getElementById('snip_list');
-      list.innerHTML = data.map(s => `
-        <div>
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <div>
-              <strong style="display:block">${escapeHtml(s.title)}</strong>
-              <div class="meta muted">${new Date(s.created_at).toLocaleString()}</div>
-            </div>
-            <div class="row">
-              <button class="neon-btn" onclick="loadSnippet(${s.id})">Загрузить</button>
-              <button class="neon-btn" onclick="deleteSnippet(${s.id})">Удалить</button>
-            </div>
-          </div>
-          <pre>${escapeHtml(s.code)}</pre>
-        </div>
-      `).join('');
-      toast('Сниппеты загружены');
-    }catch(e){
-      // if response is HTML (like login page) res.json() will throw — show raw
-      alert('Ошибка при получении сниппетов: ' + e.message + '\\nПроверь URL: ' + API_BASE);
-      console.error(e);
-    }
   }
 
   async function saveSnippet(){
@@ -646,4 +625,5 @@
   </script>
 </body>
 </html>
+
 
